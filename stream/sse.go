@@ -15,6 +15,10 @@ import (
 	"github.com/r3labs/sse"
 )
 
+type Stream interface {
+	Pub(v interface{})
+}
+
 // SSEClient is Server Send Event object
 type SSEClient struct {
 	api           rest.ClientWithResponsesInterface
@@ -22,6 +26,7 @@ type SSEClient struct {
 	cache         cache.Cache
 	logger        logger.Logger
 	onStreamError func()
+	changeStream  Stream
 }
 
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
@@ -35,6 +40,7 @@ func NewSSEClient(
 	api rest.ClientWithResponsesInterface,
 	logger logger.Logger,
 	onStreamError func(),
+	changeStream Stream,
 ) *SSEClient {
 	client.Headers["Authorization"] = fmt.Sprintf("Bearer %s", token)
 	client.Headers["API-Key"] = apiKey
@@ -128,8 +134,13 @@ func (c *SSEClient) Connect(environment string) {
 									Name: identifier,
 								}, response.JSON200.Convert())
 							}
+
 						}(environment, cfMsg.Identifier)
 					}
+				}
+
+				if c.changeStream != nil {
+					c.changeStream.Pub(msg)
 				}
 			}
 		})
