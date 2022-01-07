@@ -24,6 +24,10 @@ import (
 	"github.com/r3labs/sse"
 )
 
+type ChangeStream interface {
+	Pub(v interface{})
+}
+
 // CfClient is the Feature Flag client.
 //
 // This object evaluates feature flags and communicates with Feature Flag services.
@@ -179,7 +183,7 @@ func (c *CfClient) streamConnect() {
 		defer c.mux.RUnlock()
 		c.streamConnected = false
 	}
-	conn := stream.NewSSEClient(c.sdkKey, c.token, sseClient, c.config.Cache, c.api, c.config.Logger, streamErr)
+	conn := stream.NewSSEClient(c.sdkKey, c.token, sseClient, c.config.Cache, c.api, c.config.Logger, streamErr, c.config.changeStream)
 
 	// Connect kicks off a goroutine that attempts to establish a stream connection
 	// while this is happening we set streamConnected to true - if any errors happen

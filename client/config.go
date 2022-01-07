@@ -23,6 +23,7 @@ type config struct {
 	enableStream bool
 	enableStore  bool
 	target       evaluation.Target
+	changeStream ChangeStream
 }
 
 func newDefaultConfig() *config {

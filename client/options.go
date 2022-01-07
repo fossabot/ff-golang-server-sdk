@@ -88,3 +88,9 @@ func WithTarget(target evaluation.Target) ConfigOption {
 		config.target = target
 	}
 }
+
+func WithChangeStream(stream ChangeStream) ConfigOption {
+	return func(config *config) {
+		config.changeStream = stream
+	}
+}
