@@ -12,6 +12,7 @@ To sign up, https://app.harness.io/auth/#/signup/
 # Harness FFM Server-side SDK for Go
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/drone/ff-golang-server-sdk)](https://goreportcard.com/report/github.com/drone/ff-golang-server-sdk)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fksatchit%2Fff-golang-server-sdk.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fksatchit%2Fff-golang-server-sdk?ref=badge_shield)
 
 ## FFM overview
 FFM is feature flag management platform for helping teams to deliver better software and faster.
@@ -53,3 +54,6 @@ Flush any changes and close the SDK
 ```golang
 client.close()
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fksatchit%2Fff-golang-server-sdk.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fksatchit%2Fff-golang-server-sdk?ref=badge_large)
